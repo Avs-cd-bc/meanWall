@@ -54,11 +54,12 @@ function MeanController(){
       }
     });
   }
-  self.all = function(req, res){
+
+  self.index = function(req, res){
     console.log("redirected to wall");
-    Message.find({}).populate("_user").populate("comments").exec(function(err, messages){
+    Message.find({}).populate("comments").populate("_user").exec(function(err, messages){
       if(err) res.json(err);
-      else console.log(messages);
+      else res.json(messages);
     });
   }
 }

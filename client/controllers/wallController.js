@@ -2,10 +2,20 @@ angular.module("app").controller("WallController", WallController);
 
 function WallController($scope, $location, meanFactory){
   $scope.user = {};
+  $scope.wall = {};
   function getUser(){
     meanFactory.getUser(function(user){
-      console.log(user);
+      if(!user){
+        $location.url("/login");
+      }
       $scope.user.name = user;
+    });
+  }
+  function Index(){
+    meanFactory.Index(function(factoryData){
+      console.log("calling index");
+      $scope.wall = factoryData;
+      console.log($scope.wall);
     });
   }
 
@@ -14,5 +24,9 @@ function WallController($scope, $location, meanFactory){
       console.log("Message Posted!");
     });
   }
-    getUser();
+
+  getUser();
+  Index();
+
+
 }

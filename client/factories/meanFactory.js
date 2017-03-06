@@ -21,5 +21,12 @@ function meanFactory($http){
       callback(returnedData);
     });
   }
+
+  factory.Index = function(callback){
+    $http.get("/wall").then(function(returnedData){
+      factory.wall = returnedData.data;
+      callback(factory.wall);
+    });
+  }
   return factory;
 }
